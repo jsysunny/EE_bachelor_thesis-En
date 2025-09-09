@@ -25,7 +25,7 @@
 
 1. [📌 Project Overview](#1--project-overview)  
 2. [🔧 Components](#2--components)  
-3. [💻 Technologies Used](#3--technologies-used)  
+3. [💻 Technologies ](#3--technologies)  
 4. [🧭 System Workflow](#4--system-workflow)  
 5. [💻 How to Run Code](#5--how-to-run-code)  
 6. [📷 Demonstration Videos & Images](#6--demonstration-videos--images)  
@@ -46,7 +46,7 @@ to allow users to pick up food using only eye movements—without using their ar
 
 &nbsp;
 
-### 🎯 Objectives
+### 🎯 Goal
 
 - Develop a user-friendly interface to improve **independence for elderly and mobility-impaired individuals**
 - Enable desired actions with **simple eye movements (left/right/blink)**  
@@ -92,7 +92,7 @@ Future applications can be extended to **collaborative robots (Cobots)** for:
 
 &nbsp;
 
-## 3. 💻 Technologies Used
+## 3. 💻 Technologies
 
 | Technology | Description |
 |-----------|-------------|
