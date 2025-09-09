@@ -196,19 +196,38 @@ Implemented three models for EOG gaze classification and compared performance:
 
 <img width="800" height="253" alt="image" src="https://github.com/user-attachments/assets/b0077c95-b36c-4cac-a398-0931d86e590d" />
 
+&nbsp;
 
-### 🔌 Circuit & Control
+### 🔌 Circuit Configuration
 
-- Motor wires extended and connected to Arduino pins  
-- Powered with 5 V power supply for stable torque  
-- Servo control implemented via Arduino C++ code
+- Extended the motor wires and connected them to the corresponding pins on the Arduino board  
+- Connected a dedicated **5V power supply** to provide sufficient torque to the motors  
+- Used **short jumper wires** to minimize power loss
 
-### 🔁 State Machine Logic
+&nbsp;
 
-- Gaze direction classified as left, right, or center  
-- Finite State Machine (FSM) controls arm movement according to classification results
+### 💻 Arduino Code Structure
 
-[🔝 Back to Top](#-table-of-contents)
+- Board used: **Arduino Nano 33 BLE Sense**  
+- Implemented servo motor control using Arduino code → executed robotic arm movements  
+- Controlled each motor’s pin and angle to achieve **precise gripping motion**
+
+<img width="1119" height="759" alt="image" src="https://github.com/user-attachments/assets/0052be4e-ef41-47a7-84c9-b2604e01437f" />
+
+<img width="1124" height="723" alt="image" src="https://github.com/user-attachments/assets/58e24a3b-5bac-46b5-af82-9e61803bb4fe" />
+
+&nbsp;
+
+### 🔁 Direction Switching Logic
+
+- Detected gaze direction changes using the EOG sensor  
+- Designed a **Finite State Machine (FSM)** to branch robotic arm behavior based on classified gaze direction  
+
+<img width="1124" height="629" alt="image" src="https://github.com/user-attachments/assets/6f8ef34f-51cc-4cb8-92f0-d392a9d9a9fc" />
+
+<img width="440" height="158" alt="image" src="https://github.com/user-attachments/assets/58844b15-6e3e-4815-a592-17cf558783b1" />
+
+<img width="883" height="399" alt="image" src="https://github.com/user-attachments/assets/1d651cbf-0edd-45bf-aee6-c6f938ea0c28" />
 
 &nbsp;
 
@@ -216,8 +235,8 @@ Implemented three models for EOG gaze classification and compared performance:
 
 <img width="857" height="341" alt="image" src="https://github.com/user-attachments/assets/3a3af50d-4ca5-4de7-8538-c315d31d9a54" />
 
-- Robotic arm successfully performed direction switching and grabbing using **only the user’s eye movements**  
-- Demonstrated feasibility of integrating LSTM-based EOG classification with real-time robotic control
+- Successfully achieved accurate **direction switching and gripping motions** using **only the user’s eye movements**  
+- Verified real-time integration between the **LSTM-based EOG classification model** and robotic arm control system
 
 [🔝 Back to Top](#-table-of-contents)
 
@@ -227,7 +246,7 @@ Implemented three models for EOG gaze classification and compared performance:
 
 ### 🤖 EogDeepLearning-Robot
 
-- Code: [`eog_deeplearning`](./Arduino/Arduino/eog_deeplearning/eog_deeplearning-DESKTOP-O965BML.ino)
+- Source code: [`eog_deeplearning`](./Arduino/Arduino/eog_deeplearning/eog_deeplearning-DESKTOP-O965BML.ino)
 
 [🔝 Back to Top](#-table-of-contents)
 
