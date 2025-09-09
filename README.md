@@ -120,23 +120,82 @@ PSL EOG sensors were used to measure eye potential, connected to Arduino Nano, a
 - Built-in 60 Hz notch filter, 0.05 Hz HPF, 10 Hz LPF  
 - Output voltage range: 0–3.3 V
 
-### 🔀 Slope-Based Feature Extraction
+<img width="797" height="281" alt="image" src="https://github.com/user-attachments/assets/408c7b3e-a216-483f-af66-ad0f24a5c994" />
 
-Only the **initial slope change** right after eye movement showed distinct differences between left/right.  
-Therefore, **5-second post-gaze EOG windows were differentiated** to create a new dataset.
+<img width="807" height="404" alt="image" src="https://github.com/user-attachments/assets/937b0241-c563-4d71-8d9b-f2b6f350d047" />
+### 📊 Data Preprocessing
 
-### 🤖 Model Training & Selection
+For analysis, **data preprocessing** was first performed:
 
-- CNN: Accuracy 80.7%  
-- SVM: Accuracy 88.8%  
-- **LSTM: Accuracy 92.5% → Selected final model**
+- Downsampled the sampling frequency to **125 Hz**  
+- Removed the mean value and applied scaling to better visualize variations  
+- Collected data while looking **straight ahead and then left (or right)** in 1-second intervals  
+- Split EOG data into 2-second segments (250 samples) for inspection  
 
-Model was converted to **TensorFlow Lite** and deployed on Arduino Nano for real-time inference.
+The results showed a clear difference in EOG waveforms between left and right gazes:  
 
-### 🛠️ 3D-Printed Arm Design & Assembly
+- **Left gaze → waveform dropped downward from the center**  
+- **Right gaze → waveform spiked upward from the center**
 
-- Designed a 6-DOF robotic arm capable of precise movements  
-- MG995 motors for base/shoulder/elbow joints, SG90 for wrist/gripper
+Across the entire dataset, the following waveform patterns were observed:
+
+> Since the EOG being measured primarily captures **changes in eye movement**,  
+> the absolute amplitude difference between left and right gaze was relatively small,  
+> making simple threshold-based classification **insufficient**.
+
+<img width="800" height="233" alt="image" src="https://github.com/user-attachments/assets/099fff83-1609-4978-b938-a644da3eaa8b" />
+
+&nbsp;
+
+### 🔀 Slope-Based Analysis
+
+It was confirmed that **only at the moment of direction change** did the EOG signal exhibit distinct slope differences.  
+Therefore, **EOG data for the first 5 seconds after each eye movement was collected and differentiated** to form the dataset.
+
+<img width="800" height="249" alt="image" src="https://github.com/user-attachments/assets/6ff94c7b-98b6-4777-b3ae-cfd5dbbab40b" />
+
+- Conducted alternating gaze experiments at **30° and 90° angles**  
+- Found no significant numerical difference between angle changes  
+→ Classified only **Left, Right, Center** and adjusted robot motion **based on count rather than angle**
+
+&nbsp;
+
+### 🤖 Model Development
+
+- Each dataset was divided into **5-sample segments (`SAMPLES_PER_EOG`)**  
+- Converted into 1D arrays and stored in the `inputs` list  
+
+<img width="700" height="159" alt="image" src="https://github.com/user-attachments/assets/cd734c30-e586-48d6-a6b2-b6d0f463d68a" />
+
+- Each segment labeled as one of three classes: `left`, `right`, `center`  
+- Converted into one-hot encoded vectors and stored in the `outputs` list  
+
+&nbsp;
+
+### 🤖 Model Comparison & Selection
+
+Implemented three models for EOG gaze classification and compared performance:
+
+- **CNN:** Accuracy 80.7%  
+- **SVM:** Accuracy 88.8%  
+- **LSTM:** Accuracy **92.5% → selected as final model**
+
+<img width="700" height="300" alt="image" src="https://github.com/user-attachments/assets/e5efd2e9-1446-4b7b-b44f-40b92dc432a2" />
+
+<img width="1059" height="598" alt="image" src="https://github.com/user-attachments/assets/974decef-c945-4a01-bc82-730f28b3d2e4" />
+
+&nbsp;
+
+### 🛠️ 3D Printing & Assembly of Robotic Arm
+
+- Designed a **6-DOF robotic arm** capable of performing complex and precise operations  
+- Modeled the arm in 3D CAD, printed parts, and assembled them manually  
+- Motor configuration:  
+  - **MG995:** Base rotation, shoulder joints ×2, elbow joint  
+  - **SG90:** Wrist and gripper
+
+<img width="800" height="253" alt="image" src="https://github.com/user-attachments/assets/b0077c95-b36c-4cac-a398-0931d86e590d" />
+
 
 ### 🔌 Circuit & Control
 
